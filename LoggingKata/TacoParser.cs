@@ -27,15 +27,19 @@
             // that conforms to ITrackable
             
             // TODO: Create an instance of the Point Struct
+            var location = new Point();
+            location.Latitude = latitude;
+            location.Longitude = longitude;
             // TODO: Set the values of the point correctly (Latitude and Longitude) 
 
             // TODO: Create an instance of the TacoBell class
             // TODO: Set the values of the class correctly (Name and Location)
+            var tacoBell = new TacoBell();
+            tacoBell.Name = nameAndCity;
+            tacoBell.Location = location;
 
             // TODO: Then, return the instance of your TacoBell class,
-            // since it conforms to ITrackable
-
-            return null;
+            return tacoBell;
         }
     }
 }
