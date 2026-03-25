@@ -35,8 +35,11 @@ namespace LoggingKata
 
             // TODO: Create two `ITrackable` variables with initial values of `null`. 
             // These will be used to store your two Taco Bells that are the farthest from each other.
+            ITrackable tacoBellOne = null;
+            ITrackable tacoBellTwo = null;
             
             // TODO: Create a `double` variable to store the distance
+            var distance = 0.0;
 
             // TODO: Add the Geolocation library to enable location comparisons: using GeoCoordinatePortable;
             // Look up what methods you have access to within this library.
@@ -47,6 +50,29 @@ namespace LoggingKata
             // TODO: Create a loop to go through each item in your collection of locations.
             // This loop will let you select one location at a time to act as the "starting point" or "origin" location.
             // Naming suggestion for variable: `locA`
+            for(int i = 0; i < locations.Length; i++)
+            {
+                var locA = locations[i];
+                var corA = new GeoCoordinate();
+                corA.Longitude = locA.Location.Longitude;
+                corA.Latitude = locA.Location.Latitude;
+
+                for (int j = 0; j < locations.Length; j++)
+                {
+                    var locB = locations[j];
+                    var corB = new GeoCoordinate();
+                    corB.Longitude = locB.Location.Longitude;
+                    corB.Latitude = locB.Location.Latitude;
+
+                    if (corA.GetDistanceTo(corB) > distance)
+                    {
+                        distance = corA.GetDistanceTo(corB);
+                        tacoBellOne = locA;
+                        tacoBellTwo = locB;
+                    }
+                }
+                logger.LogInfo($"{tacoBellOne} and {tacoBellTwo}");
+            }
 
             // TODO: Once you have locA, create a new Coordinate object called `corA` with your locA's latitude and longitude.
 
@@ -66,7 +92,7 @@ namespace LoggingKata
             // Display these two Taco Bell locations to the console.
 
 
-            
+
         }
     }
 }
