@@ -18,6 +18,7 @@
             if (cells.Length < 3)
             {
                 // Log error message and return null
+                logger.LogError("cells length less than 3");
                 return null; 
             }
 

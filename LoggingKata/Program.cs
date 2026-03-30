@@ -28,7 +28,7 @@ namespace LoggingKata
             var parser = new TacoParser();
 
             // Use the Select LINQ method to parse every line in lines collection
-            var locations = lines.Select(parser.Parse).ToArray();
+            var locations = lines.Select(x => parser.Parse(x)).ToArray();
 
   
             // Complete the Parse method in TacoParser class first and then START BELOW ----------
@@ -63,16 +63,17 @@ namespace LoggingKata
                     var corB = new GeoCoordinate();
                     corB.Longitude = locB.Location.Longitude;
                     corB.Latitude = locB.Location.Latitude;
-
-                    if (corA.GetDistanceTo(corB) > distance)
+                    
+                    var distanceBetween = corA.GetDistanceTo(corB);
+                    if (distanceBetween > distance)
                     {
-                        distance = corA.GetDistanceTo(corB);
+                        distance = distanceBetween;
                         tacoBellOne = locA;
                         tacoBellTwo = locB;
                     }
                 }
-                logger.LogInfo($"{tacoBellOne} and {tacoBellTwo}");
             }
+            logger.LogInfo($"{tacoBellOne.Name} and {tacoBellTwo.Name} are {distance} meters apart.");
 
             // TODO: Once you have locA, create a new Coordinate object called `corA` with your locA's latitude and longitude.
 
